@@ -1,24 +1,42 @@
 var cells = [];
 const width = 640;
 const height = 640;
-const size = 32;
+var size = 32;
 var current = new Object();
 var cols = 0;
 var rows = 0;
 var stack = [];
 var isRunning = true;
-var fpsLabel = new Object();
+var fpsSlider = new Object();
+var sizeSlider = new Object();
+var colorInput = new Object();
+var color = 'lightblue';
 
 function setup() {
     createCanvas(width, height)
     textSize(15)
 
     button = createButton('Start/stop');
-    button.mousePressed(handleButton)
+    button.mousePressed(handlePlayButton)
 
     fpsLabel = createP('FPS Slider: ').addClass('fps');
     fpsSlider = createSlider(1, 60, 5, 1);
 
+    sizeLabel = createP('Cell size slider');
+    sizeSlider = createSlider(16,160,64,16);
+    sizeButton = createButton('Change size');
+    sizeButton.mousePressed(handleSizeButton);
+
+    colorInput = createInput('lightblue');
+    colorInput.input(handleColorEvent);
+
+    this.canvasSetup()
+}
+
+function canvasSetup() {
+    cells = [];
+    stack = [];
+    size = sizeSlider.value();
     cols = floor(width / size);
     rows = floor(height / size);
 
@@ -84,8 +102,14 @@ function removeWalls(a, b) {
     }
 }
 
-function handleButton() {
+function handlePlayButton() {
     isRunning = !isRunning;
-    select('.fps') = fpsSlider.value();
-    console.log(fpsSlider.value());
+}
+
+function handleSizeButton() {
+    this.canvasSetup();
+}
+
+function handleColorEvent() {
+    color = this.value();
 }

@@ -14,7 +14,7 @@ class Cell {
     draw() {
         if (this.visited) {
             noStroke();
-            fill('#EB274C')
+            fill(color.toString());
             rect(this.xDraw, this.yDraw, size, size);
             stroke(255);
         }
