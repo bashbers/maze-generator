@@ -1,12 +1,13 @@
 var cells = [];
 const width = 640;
 const height = 640;
-const size = 64;
+const size = 32;
 var current = new Object();
 var cols = 0;
 var rows = 0;
 var stack = [];
 var isRunning = true;
+var fpsLabel = new Object();
 
 function setup() {
     createCanvas(width, height)
@@ -15,9 +16,8 @@ function setup() {
     button = createButton('Start/stop');
     button.mousePressed(handleButton)
 
-    fpsLabel = createElement('p', 'FPS Slider')
+    fpsLabel = createP('FPS Slider: ').addClass('fps');
     fpsSlider = createSlider(1, 60, 5, 1);
-    text("FPS" + fpsSlider.value());
 
     cols = floor(width / size);
     rows = floor(height / size);
@@ -28,7 +28,6 @@ function setup() {
             cells[i][j] = new Cell(i, j);
         }
     }
-    console.log(cells);
     current = cells[0][0];
 }
 
@@ -36,7 +35,6 @@ function draw() {
     if (isRunning) {
         frameRate(fpsSlider.value());
         background(51)
-
         current.visited = true;
         let next = current.checkNeighbors();
 
@@ -88,4 +86,6 @@ function removeWalls(a, b) {
 
 function handleButton() {
     isRunning = !isRunning;
+    select('.fps') = fpsSlider.value();
+    console.log(fpsSlider.value());
 }

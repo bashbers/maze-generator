@@ -23,7 +23,6 @@ class Cell {
         strokeWeight(2);
         if (this.edges[0]) {
             line(this.xDraw, this.yDraw, this.xDraw + size, this.yDraw)
-            debugger;
         }
         if (this.edges[1]) {
             line(this.xDraw + size, this.yDraw, this.xDraw + size, this.yDraw + size)
